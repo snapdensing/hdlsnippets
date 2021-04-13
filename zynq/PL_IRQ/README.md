@@ -28,4 +28,4 @@ We also need to change the **SENSITIVITY** parameter to `EDGE_RISING` since our 
 
 Exporting the hardware design to Vitis/SDK should generate the necessary board support package files. Appropriate constants for the interrupt line should be automatically generated in the **xparameters.h** file. The address of the fabric interrupts would follow the naming convention **XPAR_FABRIC_[Instance Name]**. In our example, the constant is `XPAR_FABRIC_PLTIMER_0_TRIG_OUT_INTR`.
 
-Sample code for interrupt handling is included in the [helloworld.c](hello_world.c) file. The original code was obtained from this [tutorial](http://www.globaltek.kr/zynq-interrupt-example-tutorial/). The code was modified to support the edge-triggered IRQ in our example.
+Sample code for interrupt handling is included in the [helloworld.c](helloworld.c) file. The original code was obtained from this [tutorial](http://www.globaltek.kr/zynq-interrupt-example-tutorial/). The code was modified to support the edge-triggered IRQ in our example.
