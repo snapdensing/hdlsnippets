@@ -11,7 +11,10 @@ module datagen(
   m_axis_tvalid,
   m_axis_tready,
   m_axis_tlast,
-  m_axis_tdata
+  m_axis_tdata,
+  
+  debug_state,
+  debug_ctr
   );
 
   input clk,nrst;
@@ -20,6 +23,9 @@ module datagen(
   output done;
   input clr;
   input [31:0] delay;
+  
+  output [1:0] debug_state;
+  output [7:0] debug_ctr;
 
   /* AXI Stream master */
   output m_axis_tvalid;
@@ -77,6 +83,9 @@ module datagen(
       else
         delay_ctr <= 0;
   
+  wire [7:0] frame_size_m1;
+  assign frame_size_m1 = frame_size - 8'd1;
+  
   /* State machine */    
   always@(posedge clk)
     if (!nrst)
@@ -100,7 +109,7 @@ module datagen(
 
         S_SAMPLE:
           if (en_sample)
-            if (buf_tail == frame_size)
+            if (buf_tail == frame_size_m1)
               state <= S_STREAM;
             else
               state <= S_SAMPLE;
@@ -108,7 +117,7 @@ module datagen(
             state <= S_IDLE;
 
         S_STREAM:
-          if (buf_ptr == frame_size)
+          if (buf_ptr == frame_size_m1)
             state <= S_DELAY;
           else
             state <= S_STREAM;
@@ -123,7 +132,7 @@ module datagen(
     else
       case(state)
         S_SAMPLE:
-          if (buf_tail == frame_size)
+          if (buf_tail == frame_size_m1)
             done <= 1'b1; // latch up
           else
             done <= 0;
@@ -144,7 +153,7 @@ module datagen(
   /* AXI Stream master interface */
   assign m_axis_tvalid = (state == S_STREAM)? 1'b1 : 0;
   assign m_axis_tdata = buffer[buf_ptr];
-  assign m_axis_tlast = ((state == S_STREAM) && (buf_ptr == frame_size))? 1'b1 :0;  
+  assign m_axis_tlast = ((state == S_STREAM) && (buf_ptr == frame_size_m1))? 1'b1 :0;  
  
   always@(posedge clk)
     if (!nrst)
@@ -157,4 +166,7 @@ module datagen(
           buf_ptr <= buf_ptr;
       else
         buf_ptr <= 0;
+        
+  assign debug_state = state;
+  assign debug_ctr = ctr;
 endmodule

@@ -376,7 +376,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>09d69c13</spirit:value>
+            <spirit:value>dd7c89bc</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -392,7 +392,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>09d69c13</spirit:value>
+            <spirit:value>dd7c89bc</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -997,8 +997,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>datagen_axiwrapper_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>6</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2021-05-21T09:29:38Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>7</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2021-05-26T11:42:49Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@2ab0d5f5_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@537e66e9_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
@@ -1131,13 +1131,27 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@15ef6245_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@235f2710_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@281acff6_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4392da0d_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ae1c560_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13db27d8_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@528431f7_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@31139460_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@569887b4_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74301a6a_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@45ff467a_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4cac35a2_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b3ed70b_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@436345cd_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5495609d_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@27a70a94_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61318459_ARCHIVE_LOCATION">/home/snap/Work/hdlsnippets/zynq/dma/ip_repo/datagen_axiwrapper_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2020.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="efde4c04"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="aa5da5c8"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="7eab1b67"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="def348d3"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="049c7ad5"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="d5b5e4b3"/>

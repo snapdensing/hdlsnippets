@@ -86,18 +86,12 @@ static XScuGic_Config *GicConfig;
 /* Flags for IRQ Handlers */
 int datagenFlag;
 
-/* State definitions */
-#define S_PROMPT 1
-#define S_WAIT   2
-
 int main()
 {
-	int state;
 	int Status;
 	int i;
-    init_platform();
 
-    print("Hello World\n\r");
+    init_platform();
 
     /* DMA buffer */
     u8 *RxBufferPtr = (u8 *)BUFFER_BASE;
@@ -115,44 +109,31 @@ int main()
     startDatagenCtr();
 
     /* Initialize PS UART */
-    XUartPs_Config *UartPsConfigPtr;
+    /*XUartPs_Config *UartPsConfigPtr;
     UartPsConfigPtr = XUartPs_LookupConfig(XPAR_PS7_UART_1_DEVICE_ID);
     Status = XUartPs_CfgInitialize(&UartPs, UartPsConfigPtr, UartPsConfigPtr->BaseAddress);
     if (Status != XST_SUCCESS){
     	print("Error Initializing PS UART\r\n");
     	return XST_FAILURE;
     }
-    XUartPs_SetBaudRate(&UartPs, 115200);
-
-    /* PS UART variables */
-    int rxBytes;
-    u8 UartPsBuf;
+    XUartPs_SetBaudRate(&UartPs, 115200);*/
 
     /* Initialize Interrupts */
     initIrq();
-
-    state = S_PROMPT;
     datagenFlag = 0;
-    while(1){
-    	switch(state){
-    	case S_PROMPT:
-    		print("Press any key to start...\r\n");
-    		rxBytes = 0;
-    		while (rxBytes == 0){
-    			rxBytes = XUartPs_Recv(&UartPs, &UartPsBuf, 1); // Blocking wait
-    		}
-    		startDatagenSample();
-    		xil_printf("Datagen Config Reg: 0x%X\n",readDatagenCfg());
-    		state = S_WAIT;
-    		xil_printf("Initial contents: \n");
-			//for (i=0; i<FRAME_SIZE; i++){
-			for (i=0; i<BUFFER_DEPTH; i++){
-				xil_printf("Data[%d]: 0x%X\n", i, RxBufferPtr[i]);
-			}
-    		break;
 
-    	case S_WAIT:
-    		print("Waiting for datagen transfer...\r\n");
+    /* Display buffer contents */
+	xil_printf("***** Initial buffer contents: \n");
+	for (i=0; i<BUFFER_DEPTH; i++){
+		xil_printf("      Data[%d]: 0x%02X\n", i, RxBufferPtr[i]);
+	}
+
+	/* Enable DataGen Sample Generation */
+	startDatagenSample();
+
+    while(1){
+
+    		print("***** Waiting for datagen transfer...\r\n");
     		i = 0;
     		while(datagenFlag == 0){
     			if (i==200000000){
@@ -167,18 +148,10 @@ int main()
     		datagenFlag = 0;
 
     		/* Flush buffer */
-    		//Xil_DCacheFlushRange((UINTPTR)buffer, BUFFER_DEPTH);
     		Xil_DCacheFlushRange((UINTPTR)RxBufferPtr, BUFFER_DEPTH);
 
-    		/* Display buffer contents */
-    		xil_printf("***** Initial contents: \n");
-			//for (i=0; i<FRAME_SIZE; i++){
-			for (i=0; i<BUFFER_DEPTH; i++){
-				xil_printf("Data[%d]: 0x%X\n", i, RxBufferPtr[i]);
-			}
-
     		/* Start AXI DMA transfer */
-    		Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)RxBufferPtr, FRAME_SIZE+1, XAXIDMA_DEVICE_TO_DMA);
+    		Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)RxBufferPtr, FRAME_SIZE, XAXIDMA_DEVICE_TO_DMA);
     		if (Status != XST_SUCCESS){
     			return XST_FAILURE;
     		}
@@ -192,20 +165,12 @@ int main()
 
     		/* Display buffer contents */
     		Xil_DCacheInvalidateRange((UINTPTR)RxBufferPtr, BUFFER_DEPTH);
-    		xil_printf("***** Final contents: \n");
-    		//for (i=0; i<FRAME_SIZE; i++){
+    		xil_printf("***** Buffer contents after DMA transfer: \n");
     		for (i=0; i<BUFFER_DEPTH; i++){
-    			xil_printf("Data[%d]: 0x%X\n", i, RxBufferPtr[i]);
+    			xil_printf("      Data[%d]: 0x%02X\n", i, RxBufferPtr[i]);
     		}
 
-    		//state = S_PROMPT;
-    		state = S_WAIT;
-    		break;
 
-    	default:
-    		state = S_WAIT;
-    		break;
-    	}
     }
 
     print("Successfully ran Hello World application");
@@ -217,7 +182,6 @@ int main()
 void datagenIrqHandler(void *InstancePtr){
 	xil_printf("***** Datagen IRQ\n");
 	datagenFlag = 1;
-	xil_printf("Datagen Status Reg: 0x%X\n", readDatagenStat());
 	clrDatagenIrq();
 }
 
