@@ -22,6 +22,10 @@
         output wire [31:0] delay,
         output reg irq,
         
+        input wire [1:0] debug_state,
+        input wire [7:0] debug_ctr,
+        
+        
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -380,7 +384,8 @@
 	        //2'h1   : reg_data_out <= slv_reg1;
 	        2'h1   : reg_data_out <= {31'd0,irq};
 	        2'h2   : reg_data_out <= slv_reg2;
-	        2'h3   : reg_data_out <= slv_reg3;
+	        //2'h3   : reg_data_out <= slv_reg3;
+	        2'h3   : reg_data_out <= {22'd0,debug_state,debug_ctr};
 	        default : reg_data_out <= 0;
 	      endcase
 	end
@@ -427,7 +432,6 @@
           clr <= 1'b1;
         else
           clr <= 0;
-    
     
 	// User logic ends
 

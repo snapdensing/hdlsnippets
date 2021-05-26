@@ -60,6 +60,9 @@
 	wire done,clr;
 	wire [31:0] delay;
 	
+	wire [1:0] debug_state;
+	wire [7:0] debug_ctr;
+	
 // Instantiation of Axi Bus Interface S00_AXI
 	datagen_axi_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
@@ -92,7 +95,10 @@
         .done(done),
         .clr(clr),
         .delay(delay),
-        .irq(irq)
+        .irq(irq),
+        
+        .debug_state(debug_state),
+        .debug_ctr(debug_ctr)
 	);
 	
 	datagen datagen_inst(
@@ -107,7 +113,10 @@
         .m_axis_tvalid(m00_axis_tvalid),
         .m_axis_tready(m00_axis_tready),
         .m_axis_tlast(m00_axis_tlast),
-        .m_axis_tdata(m00_axis_tdata)
+        .m_axis_tdata(m00_axis_tdata),
+        
+        .debug_state(debug_state),
+        .debug_ctr(debug_ctr)
 	);
 
 	// Add user logic here

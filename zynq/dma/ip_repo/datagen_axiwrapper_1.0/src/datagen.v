@@ -11,7 +11,10 @@ module datagen(
   m_axis_tvalid,
   m_axis_tready,
   m_axis_tlast,
-  m_axis_tdata
+  m_axis_tdata,
+  
+  debug_state,
+  debug_ctr
   );
 
   input clk,nrst;
@@ -20,6 +23,9 @@ module datagen(
   output done;
   input clr;
   input [31:0] delay;
+  
+  output [1:0] debug_state;
+  output [7:0] debug_ctr;
 
   /* AXI Stream master */
   output m_axis_tvalid;
@@ -157,4 +163,7 @@ module datagen(
           buf_ptr <= buf_ptr;
       else
         buf_ptr <= 0;
+        
+  assign debug_state = state;
+  assign debug_ctr = ctr;
 endmodule
